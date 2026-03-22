@@ -1,281 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KBO Schedule</title>
+  <title>KBO Schedule & Results</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e0e0e0; padding: 32px 16px; }
-    h1 { text-align: center; font-size: 1.8rem; color: #ffffff; margin-bottom: 8px; letter-spacing: 1px; }
-    .subtitle { text-align: center; color: #888; font-size: 0.9rem; margin-bottom: 40px; }
-    .day-block { max-width: 700px; margin: 0 auto 32px auto; }
-    .day-header { background: #1e2130; border-left: 4px solid #e63946; padding: 10px 16px; font-size: 1rem; font-weight: 700; color: #ffffff; border-radius: 4px 4px 0 0; }
-    .game-list { list-style: none; }
-    .game-list li { border-bottom: 1px solid #1e2130; }
-    .game-list li:last-child { border-bottom: none; border-radius: 0 0 4px 4px; overflow: hidden; }
-    .game-list a { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #161a26; color: #c9d1e0; text-decoration: none; font-size: 0.95rem; transition: background 0.15s; }
-    .game-list a:hover { background: #1f2537; color: #ffffff; }
-    .teams { font-weight: 600; color: #ffffff; }
-    .venue { font-size: 0.8rem; color: #666; text-align: right; }
-    .arrow { color: #e63946; margin-left: 12px; font-size: 0.8rem; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e0e0e0; min-height: 100vh; }
+    h1 { text-align: center; font-size: 1.5rem; color: #ffffff; padding: 24px 16px 16px; letter-spacing: 0.5px; }
+
+    .nav-bar { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 16px 20px; flex-wrap: wrap; }
+    .nav-btn { width: 40px; height: 40px; background: #1e2130; border: 1px solid #2e3347; border-radius: 8px; color: #ffffff; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+    .nav-btn:hover { background: #2a2f45; }
+    .team-filter { padding: 9px 14px; background: #1e2130; border: 1px solid #2e3347; border-radius: 8px; color: #ffffff; font-size: 0.9rem; cursor: pointer; outline: none; min-width: 140px; }
+    .team-filter option { background: #1e2130; }
+    .date-display { padding: 9px 14px; background: #1e2130; border: 1px solid #2e3347; border-radius: 8px; color: #ffffff; font-size: 0.9rem; min-width: 150px; text-align: center; }
+
+    .day-block { max-width: 600px; margin: 0 auto 32px; padding: 0 16px; }
+    .day-title { text-align: center; font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 16px; }
+
+    .game-card { display: flex; align-items: center; justify-content: space-between; background: #161a26; border: 1px solid #1e2130; border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; text-decoration: none; color: #e0e0e0; transition: background 0.15s, border-color 0.15s; }
+    .game-card:hover { background: #1f2537; border-color: #3a4060; }
+
+    .team-side { display: flex; align-items: center; gap: 10px; flex: 1; }
+    .team-side.home { flex-direction: row-reverse; text-align: right; }
+
+    .team-logo { width: 42px; height: 42px; border-radius: 50%; background: #2a2f45; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; flex-shrink: 0; border: 2px solid #2e3347; letter-spacing: -0.5px; }
+    .team-name { font-size: 0.9rem; font-weight: 600; color: #ffffff; line-height: 1.3; }
+
+    .score-center { display: flex; flex-direction: column; align-items: center; min-width: 90px; padding: 0 8px; }
+    .score { font-size: 1.4rem; font-weight: 800; color: #ffffff; letter-spacing: 2px; }
+    .status { font-size: 0.7rem; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .no-games { text-align: center; color: #555; font-size: 0.95rem; padding: 60px 16px; }
+
+    .logo-kt  { background:#1a1a2e; color:#c8a951; border-color:#c8a951; }
+    .logo-lg  { background:#1a1a2e; color:#c8102e; border-color:#c8102e; }
+    .logo-ssg { background:#1a1a2e; color:#ce0e2d; border-color:#ce0e2d; }
+    .logo-kia { background:#1a1a2e; color:#ea0029; border-color:#ea0029; }
+    .logo-sam { background:#1a1a2e; color:#074ca1; border-color:#074ca1; }
+    .logo-han { background:#1a1a2e; color:#ff6600; border-color:#ff6600; }
+    .logo-doo { background:#1a1a2e; color:#8888cc; border-color:#5555aa; }
+    .logo-lot { background:#1a1a2e; color:#6699bb; border-color:#4477aa; }
+    .logo-kiw { background:#1a1a2e; color:#820024; border-color:#820024; }
+    .logo-nc  { background:#1a1a2e; color:#315288; border-color:#315288; }
   </style>
 </head>
 <body>
-  <h1>⚾ KBO Schedule</h1>
-  <p class="subtitle">Ukupno 48 utakmica — klikni za statistiku</p>
 
-  <div class="day-block">
-    <div class="day-header">📅 March 12, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Kiwoom-Heroes-vs-Doosan-Bears-20260312.html">
-        <span class="teams">Kiwoom Heroes vs. Doosan Bears</span>
-        <span class="venue">Icheon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/KT-Wiz-vs-Lotte-Giants-20260312.html">
-        <span class="teams">KT Wiz vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-NC-Dinos-20260312.html">
-        <span class="teams">LG Twins vs. NC Dinos</span>
-        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Samsung-Lions-vs-Hanwha-Eagles-20260312.html">
-        <span class="teams">Samsung Lions vs. Hanwha Eagles</span>
-        <span class="venue">Daejeon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/SSG-Landers-vs-Kia-Tigers-20260312.html">
-        <span class="teams">SSG Landers vs. Kia Tigers</span>
-        <span class="venue">Gwangju <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+<h1>⚾ KBO Schedule & Results</h1>
 
-  <div class="day-block">
-    <div class="day-header">📅 March 13, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Kiwoom-Heroes-vs-Doosan-Bears-20260313.html">
-        <span class="teams">Kiwoom Heroes vs. Doosan Bears</span>
-        <span class="venue">Icheon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/KT-Wiz-vs-Lotte-Giants-20260313.html">
-        <span class="teams">KT Wiz vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-NC-Dinos-20260313.html">
-        <span class="teams">LG Twins vs. NC Dinos</span>
-        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Samsung-Lions-vs-Hanwha-Eagles-20260313.html">
-        <span class="teams">Samsung Lions vs. Hanwha Eagles</span>
-        <span class="venue">Daejeon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/SSG-Landers-vs-Kia-Tigers-20260313.html">
-        <span class="teams">SSG Landers vs. Kia Tigers</span>
-        <span class="venue">Gwangju <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+<div class="nav-bar">
+  <button class="nav-btn" onclick="shiftWeek(-1)" title="Previous 7 days">◀</button>
+  <select class="team-filter" id="teamFilter" onchange="render()">
+    <option value="">— All Teams —</option>
+    <option>KT Wiz</option>
+    <option>LG Twins</option>
+    <option>SSG Landers</option>
+    <option>Kia Tigers</option>
+    <option>Samsung Lions</option>
+    <option>Hanwha Eagles</option>
+    <option>Doosan Bears</option>
+    <option>Lotte Giants</option>
+    <option>Kiwoom Heroes</option>
+    <option>NC Dinos</option>
+  </select>
+  <div class="date-display" id="rangeDisplay"></div>
+  <button class="nav-btn" onclick="shiftWeek(1)" title="Next 7 days">▶</button>
+</div>
 
-  <div class="day-block">
-    <div class="day-header">📅 March 14, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Kiwoom-Heroes-vs-NC-Dinos-20260314.html">
-        <span class="teams">Kiwoom Heroes vs. NC Dinos</span>
-        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/KT-Wiz-vs-Kia-Tigers-20260314.html">
-        <span class="teams">KT Wiz vs. Kia Tigers</span>
-        <span class="venue">Gwangju <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-Lotte-Giants-20260314.html">
-        <span class="teams">LG Twins vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Samsung-Lions-vs-Doosan-Bears-20260314.html">
-        <span class="teams">Samsung Lions vs. Doosan Bears</span>
-        <span class="venue">Icheon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/SSG-Landers-vs-Hanwha-Eagles-20260314.html">
-        <span class="teams">SSG Landers vs. Hanwha Eagles</span>
-        <span class="venue">Daejeon <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+<div id="content"></div>
 
-  <div class="day-block">
-    <div class="day-header">📅 March 15, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Kiwoom-Heroes-vs-NC-Dinos-20260315.html">
-        <span class="teams">Kiwoom Heroes vs. NC Dinos</span>
-        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/KT-Wiz-vs-Kia-Tigers-20260315.html">
-        <span class="teams">KT Wiz vs. Kia Tigers</span>
-        <span class="venue">Gwangju <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-Lotte-Giants-20260315.html">
-        <span class="teams">LG Twins vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Samsung-Lions-vs-Doosan-Bears-20260315.html">
-        <span class="teams">Samsung Lions vs. Doosan Bears</span>
-        <span class="venue">Icheon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/SSG-Landers-vs-Hanwha-Eagles-20260315.html">
-        <span class="teams">SSG Landers vs. Hanwha Eagles</span>
-        <span class="venue">Daejeon <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+<script>
+const GAMES = [
+  { date:"20260312", away:"KT Wiz",        home:"Lotte Giants",    file:"KT-Wiz-vs-Lotte-Giants-20260312.html",         venue:"Busan-Sajik" },
+  { date:"20260312", away:"LG Twins",       home:"NC Dinos",        file:"LG-Twins-vs-NC-Dinos-20260312.html",           venue:"Changwon-Masan" },
+  { date:"20260312", away:"SSG Landers",    home:"Kia Tigers",      file:"SSG-Landers-vs-Kia-Tigers-20260312.html",      venue:"Gwangju" },
+  { date:"20260312", away:"Samsung Lions",  home:"Hanwha Eagles",   file:"Samsung-Lions-vs-Hanwha-Eagles-20260312.html", venue:"Daejeon" },
+  { date:"20260312", away:"Kiwoom Heroes",  home:"Doosan Bears",    file:"Kiwoom-Heroes-vs-Doosan-Bears-20260312.html",  venue:"Icheon" },
+  { date:"20260313", away:"KT Wiz",        home:"Lotte Giants",    file:"KT-Wiz-vs-Lotte-Giants-20260313.html",         venue:"Busan-Sajik" },
+  { date:"20260313", away:"LG Twins",       home:"NC Dinos",        file:"LG-Twins-vs-NC-Dinos-20260313.html",           venue:"Changwon-Masan" },
+  { date:"20260313", away:"SSG Landers",    home:"Kia Tigers",      file:"SSG-Landers-vs-Kia-Tigers-20260313.html",      venue:"Gwangju" },
+  { date:"20260313", away:"Samsung Lions",  home:"Hanwha Eagles",   file:"Samsung-Lions-vs-Hanwha-Eagles-20260313.html", venue:"Daejeon" },
+  { date:"20260313", away:"Kiwoom Heroes",  home:"Doosan Bears",    file:"Kiwoom-Heroes-vs-Doosan-Bears-20260313.html",  venue:"Icheon" },
+  { date:"20260314", away:"KT Wiz",        home:"Kia Tigers",      file:"KT-Wiz-vs-Kia-Tigers-20260314.html",           venue:"Gwangju" },
+  { date:"20260314", away:"LG Twins",       home:"Lotte Giants",    file:"LG-Twins-vs-Lotte-Giants-20260314.html",       venue:"Busan-Sajik" },
+  { date:"20260314", away:"SSG Landers",    home:"Hanwha Eagles",   file:"SSG-Landers-vs-Hanwha-Eagles-20260314.html",   venue:"Daejeon" },
+  { date:"20260314", away:"Samsung Lions",  home:"Doosan Bears",    file:"Samsung-Lions-vs-Doosan-Bears-20260314.html",  venue:"Icheon" },
+  { date:"20260314", away:"Kiwoom Heroes",  home:"NC Dinos",        file:"Kiwoom-Heroes-vs-NC-Dinos-20260314.html",      venue:"Changwon-Masan" },
+  { date:"20260315", away:"KT Wiz",        home:"Kia Tigers",      file:"KT-Wiz-vs-Kia-Tigers-20260315.html",           venue:"Gwangju" },
+  { date:"20260315", away:"LG Twins",       home:"Lotte Giants",    file:"LG-Twins-vs-Lotte-Giants-20260315.html",       venue:"Busan-Sajik" },
+  { date:"20260315", away:"SSG Landers",    home:"Hanwha Eagles",   file:"SSG-Landers-vs-Hanwha-Eagles-20260315.html",   venue:"Daejeon" },
+  { date:"20260315", away:"Samsung Lions",  home:"Doosan Bears",    file:"Samsung-Lions-vs-Doosan-Bears-20260315.html",  venue:"Icheon" },
+  { date:"20260315", away:"Kiwoom Heroes",  home:"NC Dinos",        file:"Kiwoom-Heroes-vs-NC-Dinos-20260315.html",      venue:"Changwon-Masan" },
+  { date:"20260316", away:"LG Twins",       home:"KT Wiz",          file:"LG-Twins-vs-KT-Wiz-20260316.html",             venue:"Suwon" },
+  { date:"20260316", away:"Doosan Bears",   home:"Hanwha Eagles",   file:"Doosan-Bears-vs-Hanwha-Eagles-20260316.html",  venue:"Daejeon" },
+  { date:"20260316", away:"Samsung Lions",  home:"SSG Landers",     file:"Samsung-Lions-vs-SSG-Landers-20260316.html",   venue:"Incheon-Munhak" },
+  { date:"20260316", away:"Kiwoom Heroes",  home:"Lotte Giants",    file:"Kiwoom-Heroes-vs-Lotte-Giants-20260316.html",  venue:"Busan-Sajik" },
+  { date:"20260316", away:"Kia Tigers",     home:"NC Dinos",        file:"Kia-Tigers-vs-NC-Dinos-20260316.html",         venue:"Changwon" },
+  { date:"20260317", away:"Kia Tigers",     home:"NC Dinos",        file:"Kia-Tigers-vs-NC-Dinos-20260317.html",         venue:"Changwon" },
+  { date:"20260317", away:"LG Twins",       home:"KT Wiz",          file:"LG-Twins-vs-KT-Wiz-20260317.html",             venue:"Suwon" },
+  { date:"20260317", away:"Doosan Bears",   home:"Hanwha Eagles",   file:"Doosan-Bears-vs-Hanwha-Eagles-20260317.html",  venue:"Daejeon" },
+  { date:"20260317", away:"Samsung Lions",  home:"SSG Landers",     file:"Samsung-Lions-vs-SSG-Landers-20260317.html",   venue:"Incheon-Munhak" },
+  { date:"20260317", away:"Kiwoom Heroes",  home:"Lotte Giants",    file:"Kiwoom-Heroes-vs-Lotte-Giants-20260317.html",  venue:"Busan-Sajik" },
+  { date:"20260319", away:"Kia Tigers",     home:"Hanwha Eagles",   file:"13217-Kia-vs-Hanwha-20260319.html",            venue:"Daejeon" },
+  { date:"20260319", away:"LG Twins",       home:"SSG Landers",     file:"LG-Twins-vs-SSG-Landers-20260319.html",        venue:"Incheon-Munhak" },
+  { date:"20260319", away:"Doosan Bears",   home:"Lotte Giants",    file:"Doosan-Bears-vs-Lotte-Giants-20260319.html",   venue:"Busan-Sajik" },
+  { date:"20260319", away:"Samsung Lions",  home:"NC Dinos",        file:"Samsung-Lions-vs-NC-Dinos-20260319.html",      venue:"Changwon" },
+  { date:"20260319", away:"Kiwoom Heroes",  home:"KT Wiz",          file:"Kiwoom-Heroes-vs-KT-Wiz-20260319.html",        venue:"Suwon" },
+  { date:"20260320", away:"Kia Tigers",     home:"Hanwha Eagles",   file:"Kia-Tigers-vs-Hanwha-Eagles-20260320.html",    venue:"Daejeon" },
+  { date:"20260320", away:"Doosan Bears",   home:"Lotte Giants",    file:"Doosan-Bears-vs-Lotte-Giants-20260320.html",   venue:"Busan-Sajik" },
+  { date:"20260320", away:"LG Twins",       home:"SSG Landers",     file:"LG-Twins-vs-SSG-Landers-20260320.html",        venue:"Incheon-Munhak" },
+  { date:"20260320", away:"Samsung Lions",  home:"NC Dinos",        file:"Samsung-Lions-vs-NC-Dinos-20260320.html",      venue:"Changwon" },
+  { date:"20260320", away:"Kiwoom Heroes",  home:"KT Wiz",          file:"Kiwoom-Heroes-vs-KT-Wiz-20260320.html",        venue:"Suwon" },
+  { date:"20260321", away:"Kia Tigers",     home:"Doosan Bears",    file:"Kia-Tigers-vs-Doosan-Bears-20260321.html",     venue:"Jamsil" },
+  { date:"20260321", away:"Hanwha Eagles",  home:"Lotte Giants",    file:"Hanwha-Eagles-vs-Lotte-Giants-20260321.html",  venue:"Busan-Sajik" },
+  { date:"20260321", away:"LG Twins",       home:"Samsung Lions",   file:"LG-Twins-vs-Samsung-Lions-20260321.html",      venue:"Daegu" },
+  { date:"20260321", away:"Kiwoom Heroes",  home:"SSG Landers",     file:"Kiwoom-Heroes-vs-SSG-Landers-20260321.html",   venue:"Incheon-Munhak" },
+  { date:"20260321", away:"NC Dinos",       home:"KT Wiz",          file:"NC-Dinos-vs-KT-Wiz-20260321.html",             venue:"Suwon" },
+  { date:"20260322", away:"Kia Tigers",     home:"Doosan Bears",    file:"Kia-Tigers-vs-Doosan-Bears-20260322.html",     venue:"Jamsil" },
+  { date:"20260322", away:"Hanwha Eagles",  home:"Lotte Giants",    file:"Hanwha-Eagles-vs-Lotte-Giants-20260322.html",  venue:"Busan-Sajik" },
+  { date:"20260322", away:"LG Twins",       home:"Samsung Lions",   file:"LG-Twins-vs-Samsung-Lions-20260322.html",      venue:"Daegu" },
+];
 
-  <div class="day-block">
-    <div class="day-header">📅 March 16, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Doosan-Bears-vs-Hanwha-Eagles-20260316.html">
-        <span class="teams">Doosan Bears vs. Hanwha Eagles</span>
-        <span class="venue">Daejeon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kia-Tigers-vs-NC-Dinos-20260316.html">
-        <span class="teams">Kia Tigers vs. NC Dinos</span>
-        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-Lotte-Giants-20260316.html">
-        <span class="teams">Kiwoom Heroes vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-KT-Wiz-20260316.html">
-        <span class="teams">LG Twins vs. KT Wiz</span>
-        <span class="venue">Suwon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Samsung-Lions-vs-SSG-Landers-20260316.html">
-        <span class="teams">Samsung Lions vs. SSG Landers</span>
-        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+const TEAM_LOGO = {
+  "KT Wiz":        { abbr:"KT",  cls:"logo-kt"  },
+  "LG Twins":      { abbr:"LG",  cls:"logo-lg"  },
+  "SSG Landers":   { abbr:"SSG", cls:"logo-ssg" },
+  "Kia Tigers":    { abbr:"KIA", cls:"logo-kia" },
+  "Samsung Lions": { abbr:"SAM", cls:"logo-sam" },
+  "Hanwha Eagles": { abbr:"HAN", cls:"logo-han" },
+  "Doosan Bears":  { abbr:"DOO", cls:"logo-doo" },
+  "Lotte Giants":  { abbr:"LOT", cls:"logo-lot" },
+  "Kiwoom Heroes": { abbr:"KIW", cls:"logo-kiw" },
+  "NC Dinos":      { abbr:"NC",  cls:"logo-nc"  },
+};
 
-  <div class="day-block">
-    <div class="day-header">📅 March 17, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Doosan-Bears-vs-Hanwha-Eagles-20260317.html">
-        <span class="teams">Doosan Bears vs. Hanwha Eagles</span>
-        <span class="venue">Daejeon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kia-Tigers-vs-NC-Dinos-20260317.html">
-        <span class="teams">Kia Tigers vs. NC Dinos</span>
-        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-Lotte-Giants-20260317.html">
-        <span class="teams">Kiwoom Heroes vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-KT-Wiz-20260317.html">
-        <span class="teams">LG Twins vs. KT Wiz</span>
-        <span class="venue">Suwon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Samsung-Lions-vs-SSG-Landers-20260317.html">
-        <span class="teams">Samsung Lions vs. SSG Landers</span>
-        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+let weekOffset = 0;
+const ANCHOR = new Date(2026, 2, 12);
 
-  <div class="day-block">
-    <div class="day-header">📅 March 19, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Doosan-Bears-vs-Lotte-Giants-20260319.html">
-        <span class="teams">Doosan Bears vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-KT-Wiz-20260319.html">
-        <span class="teams">Kiwoom Heroes vs. KT Wiz</span>
-        <span class="venue">Suwon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-SSG-Landers-20260319.html">
-        <span class="teams">LG Twins vs. SSG Landers</span>
-        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Samsung-Lions-vs-NC-Dinos-20260319.html">
-        <span class="teams">Samsung Lions vs. NC Dinos</span>
-        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+function getWeekStart() {
+  const d = new Date(ANCHOR);
+  d.setDate(d.getDate() + weekOffset * 7);
+  return d;
+}
+function getWeekEnd() {
+  const d = getWeekStart();
+  d.setDate(d.getDate() + 6);
+  return d;
+}
+function dateToStr(d) {
+  return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtDisplay(d) {
+  return d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+}
+function fmtDayTitle(ds) {
+  const dt = new Date(+ds.slice(0,4), +ds.slice(4,6)-1, +ds.slice(6,8));
+  return dt.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+}
+function shiftWeek(dir) { weekOffset += dir; render(); }
 
-  <div class="day-block">
-    <div class="day-header">📅 March 20, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Doosan-Bears-vs-Lotte-Giants-20260320.html">
-        <span class="teams">Doosan Bears vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kia-Tigers-vs-Hanwha-Eagles-20260320.html">
-        <span class="teams">Kia Tigers vs. Hanwha Eagles</span>
-        <span class="venue">Daejeon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-KT-Wiz-20260320.html">
-        <span class="teams">Kiwoom Heroes vs. KT Wiz</span>
-        <span class="venue">Suwon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-SSG-Landers-20260320.html">
-        <span class="teams">LG Twins vs. SSG Landers</span>
-        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Samsung-Lions-vs-NC-Dinos-20260320.html">
-        <span class="teams">Samsung Lions vs. NC Dinos</span>
-        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+function logoHTML(team) {
+  const t = TEAM_LOGO[team] || { abbr: team.slice(0,3).toUpperCase(), cls:'' };
+  return `<div class="team-logo ${t.cls}">${t.abbr}</div>`;
+}
 
-  <div class="day-block">
-    <div class="day-header">📅 March 21, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Hanwha-Eagles-vs-Lotte-Giants-20260321.html">
-        <span class="teams">Hanwha Eagles vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kia-Tigers-vs-Doosan-Bears-20260321.html">
-        <span class="teams">Kia Tigers vs. Doosan Bears</span>
-        <span class="venue">Icheon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-SSG-Landers-20260321.html">
-        <span class="teams">Kiwoom Heroes vs. SSG Landers</span>
-        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-Samsung-Lions-20260321.html">
-        <span class="teams">LG Twins vs. Samsung Lions</span>
-        <span class="venue">Daegu <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/NC-Dinos-vs-KT-Wiz-20260321.html">
-        <span class="teams">NC Dinos vs. KT Wiz</span>
-        <span class="venue">Suwon <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+function render() {
+  const start    = getWeekStart();
+  const end      = getWeekEnd();
+  const startStr = dateToStr(start);
+  const endStr   = dateToStr(end);
+  const tf       = document.getElementById('teamFilter').value;
 
-  <div class="day-block">
-    <div class="day-header">📅 March 22, 2026</div>
-    <ul class="game-list">
-      <li><a href="games/Hanwha-Eagles-vs-Lotte-Giants-20260322.html">
-        <span class="teams">Hanwha Eagles vs. Lotte Giants</span>
-        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/Kia-Tigers-vs-Doosan-Bears-20260322.html">
-        <span class="teams">Kia Tigers vs. Doosan Bears</span>
-        <span class="venue">Icheon <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/LG-Twins-vs-Samsung-Lions-20260322.html">
-        <span class="teams">LG Twins vs. Samsung Lions</span>
-        <span class="venue">Daegu <span class="arrow">▶</span></span>
-      </a></li>
-      <li><a href="games/NC-Dinos-vs-KT-Wiz-20260322.html">
-        <span class="teams">NC Dinos vs. KT Wiz</span>
-        <span class="venue">Suwon <span class="arrow">▶</span></span>
-      </a></li>
-    </ul>
-  </div>
+  document.getElementById('rangeDisplay').textContent =
+    `${fmtDisplay(start)} – ${fmtDisplay(end)}`;
 
+  let filtered = GAMES.filter(g => g.date >= startStr && g.date <= endStr);
+  if (tf) filtered = filtered.filter(g => g.away === tf || g.home === tf);
+
+  const byDate = {};
+  filtered.forEach(g => { (byDate[g.date] = byDate[g.date] || []).push(g); });
+  const dates = Object.keys(byDate).sort();
+
+  const content = document.getElementById('content');
+  if (!dates.length) {
+    content.innerHTML = `<p class="no-games">No games found for this period.</p>`;
+    return;
+  }
+
+  content.innerHTML = dates.map(date => `
+    <div class="day-block">
+      <div class="day-title">${fmtDayTitle(date)}</div>
+      ${byDate[date].map(g => `
+        <a class="game-card" href="games/${g.file}">
+          <div class="team-side away">
+            ${logoHTML(g.away)}
+            <span class="team-name">${g.away}</span>
+          </div>
+          <div class="score-center">
+            <span class="score">– : –</span>
+            <span class="status">Final</span>
+          </div>
+          <div class="team-side home">
+            ${logoHTML(g.home)}
+            <span class="team-name">${g.home}</span>
+          </div>
+        </a>`).join('')}
+    </div>`).join('');
+}
+
+render();
+</script>
 </body>
 </html>
