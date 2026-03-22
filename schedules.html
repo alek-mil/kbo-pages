@@ -25,12 +25,15 @@
     .team-side { display: flex; align-items: center; gap: 10px; flex: 1; }
     .team-side.home { flex-direction: row-reverse; text-align: right; }
 
-    .team-logo { width: 42px; height: 42px; border-radius: 50%; background: #2a2f45; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; flex-shrink: 0; border: 2px solid #2e3347; letter-spacing: -0.5px; }
+    .team-logo { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; flex-shrink: 0; border: 2px solid #2e3347; letter-spacing: -0.5px; }
     .team-name { font-size: 0.9rem; font-weight: 600; color: #ffffff; line-height: 1.3; }
 
     .score-center { display: flex; flex-direction: column; align-items: center; min-width: 90px; padding: 0 8px; }
     .score { font-size: 1.4rem; font-weight: 800; color: #ffffff; letter-spacing: 2px; }
+    .score.loading { color: #444; font-size: 1rem; letter-spacing: 0; }
     .status { font-size: 0.7rem; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .status.final { color: #4caf50; }
+    .status.upcoming { color: #666; }
 
     .no-games { text-align: center; color: #555; font-size: 0.95rem; padding: 60px 16px; }
 
@@ -51,7 +54,7 @@
 <h1>⚾ KBO Schedule & Results</h1>
 
 <div class="nav-bar">
-  <button class="nav-btn" onclick="shiftWeek(-1)" title="Previous 7 days">◀</button>
+  <button class="nav-btn" onclick="shiftWeek(-1)">◀</button>
   <select class="team-filter" id="teamFilter" onchange="render()">
     <option value="">— All Teams —</option>
     <option>KT Wiz</option>
@@ -66,61 +69,61 @@
     <option>NC Dinos</option>
   </select>
   <div class="date-display" id="rangeDisplay"></div>
-  <button class="nav-btn" onclick="shiftWeek(1)" title="Next 7 days">▶</button>
+  <button class="nav-btn" onclick="shiftWeek(1)">▶</button>
 </div>
 
 <div id="content"></div>
 
 <script>
 const GAMES = [
-  { date:"20260312", away:"KT Wiz",        home:"Lotte Giants",    file:"KT-Wiz-vs-Lotte-Giants-20260312.html",         venue:"Busan-Sajik" },
-  { date:"20260312", away:"LG Twins",       home:"NC Dinos",        file:"LG-Twins-vs-NC-Dinos-20260312.html",           venue:"Changwon-Masan" },
-  { date:"20260312", away:"SSG Landers",    home:"Kia Tigers",      file:"SSG-Landers-vs-Kia-Tigers-20260312.html",      venue:"Gwangju" },
-  { date:"20260312", away:"Samsung Lions",  home:"Hanwha Eagles",   file:"Samsung-Lions-vs-Hanwha-Eagles-20260312.html", venue:"Daejeon" },
-  { date:"20260312", away:"Kiwoom Heroes",  home:"Doosan Bears",    file:"Kiwoom-Heroes-vs-Doosan-Bears-20260312.html",  venue:"Icheon" },
-  { date:"20260313", away:"KT Wiz",        home:"Lotte Giants",    file:"KT-Wiz-vs-Lotte-Giants-20260313.html",         venue:"Busan-Sajik" },
-  { date:"20260313", away:"LG Twins",       home:"NC Dinos",        file:"LG-Twins-vs-NC-Dinos-20260313.html",           venue:"Changwon-Masan" },
-  { date:"20260313", away:"SSG Landers",    home:"Kia Tigers",      file:"SSG-Landers-vs-Kia-Tigers-20260313.html",      venue:"Gwangju" },
-  { date:"20260313", away:"Samsung Lions",  home:"Hanwha Eagles",   file:"Samsung-Lions-vs-Hanwha-Eagles-20260313.html", venue:"Daejeon" },
-  { date:"20260313", away:"Kiwoom Heroes",  home:"Doosan Bears",    file:"Kiwoom-Heroes-vs-Doosan-Bears-20260313.html",  venue:"Icheon" },
-  { date:"20260314", away:"KT Wiz",        home:"Kia Tigers",      file:"KT-Wiz-vs-Kia-Tigers-20260314.html",           venue:"Gwangju" },
-  { date:"20260314", away:"LG Twins",       home:"Lotte Giants",    file:"LG-Twins-vs-Lotte-Giants-20260314.html",       venue:"Busan-Sajik" },
-  { date:"20260314", away:"SSG Landers",    home:"Hanwha Eagles",   file:"SSG-Landers-vs-Hanwha-Eagles-20260314.html",   venue:"Daejeon" },
-  { date:"20260314", away:"Samsung Lions",  home:"Doosan Bears",    file:"Samsung-Lions-vs-Doosan-Bears-20260314.html",  venue:"Icheon" },
-  { date:"20260314", away:"Kiwoom Heroes",  home:"NC Dinos",        file:"Kiwoom-Heroes-vs-NC-Dinos-20260314.html",      venue:"Changwon-Masan" },
-  { date:"20260315", away:"KT Wiz",        home:"Kia Tigers",      file:"KT-Wiz-vs-Kia-Tigers-20260315.html",           venue:"Gwangju" },
-  { date:"20260315", away:"LG Twins",       home:"Lotte Giants",    file:"LG-Twins-vs-Lotte-Giants-20260315.html",       venue:"Busan-Sajik" },
-  { date:"20260315", away:"SSG Landers",    home:"Hanwha Eagles",   file:"SSG-Landers-vs-Hanwha-Eagles-20260315.html",   venue:"Daejeon" },
-  { date:"20260315", away:"Samsung Lions",  home:"Doosan Bears",    file:"Samsung-Lions-vs-Doosan-Bears-20260315.html",  venue:"Icheon" },
-  { date:"20260315", away:"Kiwoom Heroes",  home:"NC Dinos",        file:"Kiwoom-Heroes-vs-NC-Dinos-20260315.html",      venue:"Changwon-Masan" },
-  { date:"20260316", away:"LG Twins",       home:"KT Wiz",          file:"LG-Twins-vs-KT-Wiz-20260316.html",             venue:"Suwon" },
-  { date:"20260316", away:"Doosan Bears",   home:"Hanwha Eagles",   file:"Doosan-Bears-vs-Hanwha-Eagles-20260316.html",  venue:"Daejeon" },
-  { date:"20260316", away:"Samsung Lions",  home:"SSG Landers",     file:"Samsung-Lions-vs-SSG-Landers-20260316.html",   venue:"Incheon-Munhak" },
-  { date:"20260316", away:"Kiwoom Heroes",  home:"Lotte Giants",    file:"Kiwoom-Heroes-vs-Lotte-Giants-20260316.html",  venue:"Busan-Sajik" },
-  { date:"20260316", away:"Kia Tigers",     home:"NC Dinos",        file:"Kia-Tigers-vs-NC-Dinos-20260316.html",         venue:"Changwon" },
-  { date:"20260317", away:"Kia Tigers",     home:"NC Dinos",        file:"Kia-Tigers-vs-NC-Dinos-20260317.html",         venue:"Changwon" },
-  { date:"20260317", away:"LG Twins",       home:"KT Wiz",          file:"LG-Twins-vs-KT-Wiz-20260317.html",             venue:"Suwon" },
-  { date:"20260317", away:"Doosan Bears",   home:"Hanwha Eagles",   file:"Doosan-Bears-vs-Hanwha-Eagles-20260317.html",  venue:"Daejeon" },
-  { date:"20260317", away:"Samsung Lions",  home:"SSG Landers",     file:"Samsung-Lions-vs-SSG-Landers-20260317.html",   venue:"Incheon-Munhak" },
-  { date:"20260317", away:"Kiwoom Heroes",  home:"Lotte Giants",    file:"Kiwoom-Heroes-vs-Lotte-Giants-20260317.html",  venue:"Busan-Sajik" },
-  { date:"20260319", away:"Kia Tigers",     home:"Hanwha Eagles",   file:"13217-Kia-vs-Hanwha-20260319.html",            venue:"Daejeon" },
-  { date:"20260319", away:"LG Twins",       home:"SSG Landers",     file:"LG-Twins-vs-SSG-Landers-20260319.html",        venue:"Incheon-Munhak" },
-  { date:"20260319", away:"Doosan Bears",   home:"Lotte Giants",    file:"Doosan-Bears-vs-Lotte-Giants-20260319.html",   venue:"Busan-Sajik" },
-  { date:"20260319", away:"Samsung Lions",  home:"NC Dinos",        file:"Samsung-Lions-vs-NC-Dinos-20260319.html",      venue:"Changwon" },
-  { date:"20260319", away:"Kiwoom Heroes",  home:"KT Wiz",          file:"Kiwoom-Heroes-vs-KT-Wiz-20260319.html",        venue:"Suwon" },
-  { date:"20260320", away:"Kia Tigers",     home:"Hanwha Eagles",   file:"Kia-Tigers-vs-Hanwha-Eagles-20260320.html",    venue:"Daejeon" },
-  { date:"20260320", away:"Doosan Bears",   home:"Lotte Giants",    file:"Doosan-Bears-vs-Lotte-Giants-20260320.html",   venue:"Busan-Sajik" },
-  { date:"20260320", away:"LG Twins",       home:"SSG Landers",     file:"LG-Twins-vs-SSG-Landers-20260320.html",        venue:"Incheon-Munhak" },
-  { date:"20260320", away:"Samsung Lions",  home:"NC Dinos",        file:"Samsung-Lions-vs-NC-Dinos-20260320.html",      venue:"Changwon" },
-  { date:"20260320", away:"Kiwoom Heroes",  home:"KT Wiz",          file:"Kiwoom-Heroes-vs-KT-Wiz-20260320.html",        venue:"Suwon" },
-  { date:"20260321", away:"Kia Tigers",     home:"Doosan Bears",    file:"Kia-Tigers-vs-Doosan-Bears-20260321.html",     venue:"Jamsil" },
-  { date:"20260321", away:"Hanwha Eagles",  home:"Lotte Giants",    file:"Hanwha-Eagles-vs-Lotte-Giants-20260321.html",  venue:"Busan-Sajik" },
-  { date:"20260321", away:"LG Twins",       home:"Samsung Lions",   file:"LG-Twins-vs-Samsung-Lions-20260321.html",      venue:"Daegu" },
-  { date:"20260321", away:"Kiwoom Heroes",  home:"SSG Landers",     file:"Kiwoom-Heroes-vs-SSG-Landers-20260321.html",   venue:"Incheon-Munhak" },
-  { date:"20260321", away:"NC Dinos",       home:"KT Wiz",          file:"NC-Dinos-vs-KT-Wiz-20260321.html",             venue:"Suwon" },
-  { date:"20260322", away:"Kia Tigers",     home:"Doosan Bears",    file:"Kia-Tigers-vs-Doosan-Bears-20260322.html",     venue:"Jamsil" },
-  { date:"20260322", away:"Hanwha Eagles",  home:"Lotte Giants",    file:"Hanwha-Eagles-vs-Lotte-Giants-20260322.html",  venue:"Busan-Sajik" },
-  { date:"20260322", away:"LG Twins",       home:"Samsung Lions",   file:"LG-Twins-vs-Samsung-Lions-20260322.html",      venue:"Daegu" },
+  { date:"20260312", away:"KT Wiz",        home:"Lotte Giants",    file:"KT-Wiz-vs-Lotte-Giants-20260312.html" },
+  { date:"20260312", away:"LG Twins",       home:"NC Dinos",        file:"LG-Twins-vs-NC-Dinos-20260312.html" },
+  { date:"20260312", away:"SSG Landers",    home:"Kia Tigers",      file:"SSG-Landers-vs-Kia-Tigers-20260312.html" },
+  { date:"20260312", away:"Samsung Lions",  home:"Hanwha Eagles",   file:"Samsung-Lions-vs-Hanwha-Eagles-20260312.html" },
+  { date:"20260312", away:"Kiwoom Heroes",  home:"Doosan Bears",    file:"Kiwoom-Heroes-vs-Doosan-Bears-20260312.html" },
+  { date:"20260313", away:"KT Wiz",        home:"Lotte Giants",    file:"KT-Wiz-vs-Lotte-Giants-20260313.html" },
+  { date:"20260313", away:"LG Twins",       home:"NC Dinos",        file:"LG-Twins-vs-NC-Dinos-20260313.html" },
+  { date:"20260313", away:"SSG Landers",    home:"Kia Tigers",      file:"SSG-Landers-vs-Kia-Tigers-20260313.html" },
+  { date:"20260313", away:"Samsung Lions",  home:"Hanwha Eagles",   file:"Samsung-Lions-vs-Hanwha-Eagles-20260313.html" },
+  { date:"20260313", away:"Kiwoom Heroes",  home:"Doosan Bears",    file:"Kiwoom-Heroes-vs-Doosan-Bears-20260313.html" },
+  { date:"20260314", away:"KT Wiz",        home:"Kia Tigers",      file:"KT-Wiz-vs-Kia-Tigers-20260314.html" },
+  { date:"20260314", away:"LG Twins",       home:"Lotte Giants",    file:"LG-Twins-vs-Lotte-Giants-20260314.html" },
+  { date:"20260314", away:"SSG Landers",    home:"Hanwha Eagles",   file:"SSG-Landers-vs-Hanwha-Eagles-20260314.html" },
+  { date:"20260314", away:"Samsung Lions",  home:"Doosan Bears",    file:"Samsung-Lions-vs-Doosan-Bears-20260314.html" },
+  { date:"20260314", away:"Kiwoom Heroes",  home:"NC Dinos",        file:"Kiwoom-Heroes-vs-NC-Dinos-20260314.html" },
+  { date:"20260315", away:"KT Wiz",        home:"Kia Tigers",      file:"KT-Wiz-vs-Kia-Tigers-20260315.html" },
+  { date:"20260315", away:"LG Twins",       home:"Lotte Giants",    file:"LG-Twins-vs-Lotte-Giants-20260315.html" },
+  { date:"20260315", away:"SSG Landers",    home:"Hanwha Eagles",   file:"SSG-Landers-vs-Hanwha-Eagles-20260315.html" },
+  { date:"20260315", away:"Samsung Lions",  home:"Doosan Bears",    file:"Samsung-Lions-vs-Doosan-Bears-20260315.html" },
+  { date:"20260315", away:"Kiwoom Heroes",  home:"NC Dinos",        file:"Kiwoom-Heroes-vs-NC-Dinos-20260315.html" },
+  { date:"20260316", away:"LG Twins",       home:"KT Wiz",          file:"LG-Twins-vs-KT-Wiz-20260316.html" },
+  { date:"20260316", away:"Doosan Bears",   home:"Hanwha Eagles",   file:"Doosan-Bears-vs-Hanwha-Eagles-20260316.html" },
+  { date:"20260316", away:"Samsung Lions",  home:"SSG Landers",     file:"Samsung-Lions-vs-SSG-Landers-20260316.html" },
+  { date:"20260316", away:"Kiwoom Heroes",  home:"Lotte Giants",    file:"Kiwoom-Heroes-vs-Lotte-Giants-20260316.html" },
+  { date:"20260316", away:"Kia Tigers",     home:"NC Dinos",        file:"Kia-Tigers-vs-NC-Dinos-20260316.html" },
+  { date:"20260317", away:"Kia Tigers",     home:"NC Dinos",        file:"Kia-Tigers-vs-NC-Dinos-20260317.html" },
+  { date:"20260317", away:"LG Twins",       home:"KT Wiz",          file:"LG-Twins-vs-KT-Wiz-20260317.html" },
+  { date:"20260317", away:"Doosan Bears",   home:"Hanwha Eagles",   file:"Doosan-Bears-vs-Hanwha-Eagles-20260317.html" },
+  { date:"20260317", away:"Samsung Lions",  home:"SSG Landers",     file:"Samsung-Lions-vs-SSG-Landers-20260317.html" },
+  { date:"20260317", away:"Kiwoom Heroes",  home:"Lotte Giants",    file:"Kiwoom-Heroes-vs-Lotte-Giants-20260317.html" },
+  { date:"20260319", away:"Kia Tigers",     home:"Hanwha Eagles",   file:"13217-Kia-vs-Hanwha-20260319.html" },
+  { date:"20260319", away:"LG Twins",       home:"SSG Landers",     file:"LG-Twins-vs-SSG-Landers-20260319.html" },
+  { date:"20260319", away:"Doosan Bears",   home:"Lotte Giants",    file:"Doosan-Bears-vs-Lotte-Giants-20260319.html" },
+  { date:"20260319", away:"Samsung Lions",  home:"NC Dinos",        file:"Samsung-Lions-vs-NC-Dinos-20260319.html" },
+  { date:"20260319", away:"Kiwoom Heroes",  home:"KT Wiz",          file:"Kiwoom-Heroes-vs-KT-Wiz-20260319.html" },
+  { date:"20260320", away:"Kia Tigers",     home:"Hanwha Eagles",   file:"Kia-Tigers-vs-Hanwha-Eagles-20260320.html" },
+  { date:"20260320", away:"Doosan Bears",   home:"Lotte Giants",    file:"Doosan-Bears-vs-Lotte-Giants-20260320.html" },
+  { date:"20260320", away:"LG Twins",       home:"SSG Landers",     file:"LG-Twins-vs-SSG-Landers-20260320.html" },
+  { date:"20260320", away:"Samsung Lions",  home:"NC Dinos",        file:"Samsung-Lions-vs-NC-Dinos-20260320.html" },
+  { date:"20260320", away:"Kiwoom Heroes",  home:"KT Wiz",          file:"Kiwoom-Heroes-vs-KT-Wiz-20260320.html" },
+  { date:"20260321", away:"Kia Tigers",     home:"Doosan Bears",    file:"Kia-Tigers-vs-Doosan-Bears-20260321.html" },
+  { date:"20260321", away:"Hanwha Eagles",  home:"Lotte Giants",    file:"Hanwha-Eagles-vs-Lotte-Giants-20260321.html" },
+  { date:"20260321", away:"LG Twins",       home:"Samsung Lions",   file:"LG-Twins-vs-Samsung-Lions-20260321.html" },
+  { date:"20260321", away:"Kiwoom Heroes",  home:"SSG Landers",     file:"Kiwoom-Heroes-vs-SSG-Landers-20260321.html" },
+  { date:"20260321", away:"NC Dinos",       home:"KT Wiz",          file:"NC-Dinos-vs-KT-Wiz-20260321.html" },
+  { date:"20260322", away:"Kia Tigers",     home:"Doosan Bears",    file:"Kia-Tigers-vs-Doosan-Bears-20260322.html" },
+  { date:"20260322", away:"Hanwha Eagles",  home:"Lotte Giants",    file:"Hanwha-Eagles-vs-Lotte-Giants-20260322.html" },
+  { date:"20260322", away:"LG Twins",       home:"Samsung Lions",   file:"LG-Twins-vs-Samsung-Lions-20260322.html" },
 ];
 
 const TEAM_LOGO = {
@@ -135,6 +138,9 @@ const TEAM_LOGO = {
   "Kiwoom Heroes": { abbr:"KIW", cls:"logo-kiw" },
   "NC Dinos":      { abbr:"NC",  cls:"logo-nc"  },
 };
+
+// Cache for fetched scores: file -> {away, home} or null
+const scoreCache = {};
 
 let weekOffset = 0;
 const ANCHOR = new Date(2026, 2, 12);
@@ -166,6 +172,51 @@ function logoHTML(team) {
   return `<div class="team-logo ${t.cls}">${t.abbr}</div>`;
 }
 
+// Extract score from H1 text like "KTWiz3:4LotteGiants"
+function parseScore(h1Text) {
+  const m = h1Text.match(/(\d+)\s*:\s*(\d+)/);
+  if (m) return { away: m[1], home: m[2] };
+  return null;
+}
+
+// Fetch score from game HTML file
+async function fetchScore(file) {
+  if (file in scoreCache) return scoreCache[file];
+  try {
+    const res = await fetch(`games/${file}`);
+    if (!res.ok) { scoreCache[file] = null; return null; }
+    const text = await res.text();
+    const m = text.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+    if (m) {
+      const score = parseScore(m[1]);
+      scoreCache[file] = score;
+      return score;
+    }
+  } catch(e) {}
+  scoreCache[file] = null;
+  return null;
+}
+
+// Update a single score element once fetched
+async function loadScore(file, scoreElId) {
+  const score = await fetchScore(file);
+  const el = document.getElementById(scoreElId);
+  if (!el) return;
+  if (score) {
+    el.querySelector('.score').textContent = `${score.away} : ${score.home}`;
+    el.querySelector('.score').classList.remove('loading');
+    el.querySelector('.status').textContent = 'Final';
+    el.querySelector('.status').classList.add('final');
+  } else {
+    el.querySelector('.score').textContent = '– : –';
+    el.querySelector('.score').classList.remove('loading');
+    el.querySelector('.status').textContent = 'Upcoming';
+    el.querySelector('.status').classList.add('upcoming');
+  }
+}
+
+let cardIdCounter = 0;
+
 function render() {
   const start    = getWeekStart();
   const end      = getWeekEnd();
@@ -189,25 +240,34 @@ function render() {
     return;
   }
 
+  // Build HTML with loading placeholders
+  const pendingLoads = [];
   content.innerHTML = dates.map(date => `
     <div class="day-block">
       <div class="day-title">${fmtDayTitle(date)}</div>
-      ${byDate[date].map(g => `
+      ${byDate[date].map(g => {
+        const id = `sc-${++cardIdCounter}`;
+        pendingLoads.push({ file: g.file, id });
+        return `
         <a class="game-card" href="games/${g.file}">
           <div class="team-side away">
             ${logoHTML(g.away)}
             <span class="team-name">${g.away}</span>
           </div>
-          <div class="score-center">
-            <span class="score">– : –</span>
-            <span class="status">Final</span>
+          <div class="score-center" id="${id}">
+            <span class="score loading">···</span>
+            <span class="status">Loading</span>
           </div>
           <div class="team-side home">
             ${logoHTML(g.home)}
             <span class="team-name">${g.home}</span>
           </div>
-        </a>`).join('')}
+        </a>`;
+      }).join('')}
     </div>`).join('');
+
+  // Fetch all scores in parallel
+  pendingLoads.forEach(({ file, id }) => loadScore(file, id));
 }
 
 render();
