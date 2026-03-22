@@ -1,0 +1,14 @@
+1) Go to mykbostats.com and open todays games links
+2) Right Click - Save As - Save as type WEBPAGE, SINGLE FILE
+3) Save in this location: C:\Users\autom\Desktop\kbo-pages\new_mhtml\
+4) Open in Start Git Bash and type commands one by one, not all at once!
+cd C:\Users\autom\Desktop\kbo-pages
+python mhtml_batch.py
+python generate_schedules.py
+git add .
+git commit -m "nove utakmice"
+git push
+
+
+
+then check the link https://alek-mil.github.io/kbo-pages/schedules.html

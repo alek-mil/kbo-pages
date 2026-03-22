@@ -3,184 +3,417 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KBO Schedule — March 2026</title>
+  <title>KBO Schedule</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #0f1117;
-      color: #e0e0e0;
-      padding: 32px 16px;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 1.8rem;
-      color: #ffffff;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #888;
-      font-size: 0.9rem;
-      margin-bottom: 40px;
-    }
-
-    .day-block {
-      max-width: 700px;
-      margin: 0 auto 32px auto;
-    }
-
-    .day-header {
-      background: #1e2130;
-      border-left: 4px solid #e63946;
-      padding: 10px 16px;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.5px;
-      margin-bottom: 2px;
-      border-radius: 4px 4px 0 0;
-    }
-
-    .game-list {
-      list-style: none;
-    }
-
-    .game-list li {
-      border-bottom: 1px solid #1e2130;
-    }
-
-    .game-list li:last-child {
-      border-bottom: none;
-      border-radius: 0 0 4px 4px;
-      overflow: hidden;
-    }
-
-    .game-list a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      background: #161a26;
-      color: #c9d1e0;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: background 0.15s;
-    }
-
-    .game-list a:hover {
-      background: #1f2537;
-      color: #ffffff;
-    }
-
-    .teams {
-      font-weight: 600;
-      color: #ffffff;
-    }
-
-    .venue {
-      font-size: 0.8rem;
-      color: #666;
-      text-align: right;
-    }
-
-    .arrow {
-      color: #e63946;
-      margin-left: 12px;
-      font-size: 0.8rem;
-    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e0e0e0; padding: 32px 16px; }
+    h1 { text-align: center; font-size: 1.8rem; color: #ffffff; margin-bottom: 8px; letter-spacing: 1px; }
+    .subtitle { text-align: center; color: #888; font-size: 0.9rem; margin-bottom: 40px; }
+    .day-block { max-width: 700px; margin: 0 auto 32px auto; }
+    .day-header { background: #1e2130; border-left: 4px solid #e63946; padding: 10px 16px; font-size: 1rem; font-weight: 700; color: #ffffff; border-radius: 4px 4px 0 0; }
+    .game-list { list-style: none; }
+    .game-list li { border-bottom: 1px solid #1e2130; }
+    .game-list li:last-child { border-bottom: none; border-radius: 0 0 4px 4px; overflow: hidden; }
+    .game-list a { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #161a26; color: #c9d1e0; text-decoration: none; font-size: 0.95rem; transition: background 0.15s; }
+    .game-list a:hover { background: #1f2537; color: #ffffff; }
+    .teams { font-weight: 600; color: #ffffff; }
+    .venue { font-size: 0.8rem; color: #666; text-align: right; }
+    .arrow { color: #e63946; margin-left: 12px; font-size: 0.8rem; }
   </style>
 </head>
 <body>
-
   <h1>⚾ KBO Schedule</h1>
-  <p class="subtitle">March 2026 — Click a game to view stats</p>
+  <p class="subtitle">Ukupno 83 utakmica — klikni za statistiku</p>
 
-  <!-- March 12 -->
   <div class="day-block">
     <div class="day-header">📅 March 12, 2026</div>
     <ul class="game-list">
-      <li><a href="games/KT-Wiz-vs-Lotte-Giants-20260312.html"><span class="teams">KT Wiz vs. Lotte Giants</span><span class="venue">Busan-Sajik <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/LG-Twins-vs-NC-Dinos-20260312.html"><span class="teams">LG Twins vs. NC Dinos</span><span class="venue">Changwon-Masan <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/SSG-Landers-vs-Kia-Tigers-20260312.html"><span class="teams">SSG Landers vs. Kia Tigers</span><span class="venue">Gwangju <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Samsung-Lions-vs-Hanwha-Eagles-20260312.html"><span class="teams">Samsung Lions vs. Hanwha Eagles</span><span class="venue">Daejeon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-Doosan-Bears-20260312.html"><span class="teams">Kiwoom Heroes vs. Doosan Bears</span><span class="venue">Icheon <span class="arrow">▶</span></span></a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-Doosan-Bears-20260312.html">
+        <span class="teams">Kiwoom Heroes vs. Doosan Bears</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-vs-Doosan-20260312.html">
+        <span class="teams">Kiwoom vs. Doosan</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/KT-vs-Lotte-20260312.html">
+        <span class="teams">KT vs. Lotte</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/KT-Wiz-vs-Lotte-Giants-20260312.html">
+        <span class="teams">KT Wiz vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-NC-Dinos-20260312.html">
+        <span class="teams">LG Twins vs. NC Dinos</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-vs-NC-20260312.html">
+        <span class="teams">LG vs. NC</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-Lions-vs-Hanwha-Eagles-20260312.html">
+        <span class="teams">Samsung Lions vs. Hanwha Eagles</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-vs-Hanwha-20260312.html">
+        <span class="teams">Samsung vs. Hanwha</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/SSG-Landers-vs-Kia-Tigers-20260312.html">
+        <span class="teams">SSG Landers vs. Kia Tigers</span>
+        <span class="venue">Gwangju <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/SSG-vs-Kia-20260312.html">
+        <span class="teams">SSG vs. Kia</span>
+        <span class="venue">Gwangju <span class="arrow">▶</span></span>
+      </a></li>
     </ul>
   </div>
 
-  <!-- March 13 -->
   <div class="day-block">
     <div class="day-header">📅 March 13, 2026</div>
     <ul class="game-list">
-      <li><a href="games/KT-Wiz-vs-Lotte-Giants-20260313.html"><span class="teams">KT Wiz vs. Lotte Giants</span><span class="venue">Busan-Sajik <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/LG-Twins-vs-NC-Dinos-20260313.html"><span class="teams">LG Twins vs. NC Dinos</span><span class="venue">Changwon-Masan <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/SSG-Landers-vs-Kia-Tigers-20260313.html"><span class="teams">SSG Landers vs. Kia Tigers</span><span class="venue">Gwangju <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Samsung-Lions-vs-Hanwha-Eagles-20260313.html"><span class="teams">Samsung Lions vs. Hanwha Eagles</span><span class="venue">Daejeon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-Doosan-Bears-20260313.html"><span class="teams">Kiwoom Heroes vs. Doosan Bears</span><span class="venue">Icheon <span class="arrow">▶</span></span></a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-Doosan-Bears-20260313.html">
+        <span class="teams">Kiwoom Heroes vs. Doosan Bears</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-vs-Doosan-20260313.html">
+        <span class="teams">Kiwoom vs. Doosan</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/KT-vs-Lotte-20260313.html">
+        <span class="teams">KT vs. Lotte</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/KT-Wiz-vs-Lotte-Giants-20260313.html">
+        <span class="teams">KT Wiz vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-NC-Dinos-20260313.html">
+        <span class="teams">LG Twins vs. NC Dinos</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-vs-NC-20260313.html">
+        <span class="teams">LG vs. NC</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-Lions-vs-Hanwha-Eagles-20260313.html">
+        <span class="teams">Samsung Lions vs. Hanwha Eagles</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-vs-Hanwha-20260313.html">
+        <span class="teams">Samsung vs. Hanwha</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/SSG-Landers-vs-Kia-Tigers-20260313.html">
+        <span class="teams">SSG Landers vs. Kia Tigers</span>
+        <span class="venue">Gwangju <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/SSG-vs-Kia-20260313.html">
+        <span class="teams">SSG vs. Kia</span>
+        <span class="venue">Gwangju <span class="arrow">▶</span></span>
+      </a></li>
     </ul>
   </div>
 
-  <!-- March 14 -->
   <div class="day-block">
     <div class="day-header">📅 March 14, 2026</div>
     <ul class="game-list">
-      <li><a href="games/KT-Wiz-vs-Kia-Tigers-20260314.html"><span class="teams">KT Wiz vs. Kia Tigers</span><span class="venue">Gwangju <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/LG-Twins-vs-Lotte-Giants-20260314.html"><span class="teams">LG Twins vs. Lotte Giants</span><span class="venue">Busan-Sajik <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/SSG-Landers-vs-Hanwha-Eagles-20260314.html"><span class="teams">SSG Landers vs. Hanwha Eagles</span><span class="venue">Daejeon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Samsung-Lions-vs-Doosan-Bears-20260314.html"><span class="teams">Samsung Lions vs. Doosan Bears</span><span class="venue">Icheon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-NC-Dinos-20260314.html"><span class="teams">Kiwoom Heroes vs. NC Dinos</span><span class="venue">Changwon-Masan <span class="arrow">▶</span></span></a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-NC-Dinos-20260314.html">
+        <span class="teams">Kiwoom Heroes vs. NC Dinos</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-vs-NC-20260314.html">
+        <span class="teams">Kiwoom vs. NC</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/KT-vs-Kia-20260314.html">
+        <span class="teams">KT vs. Kia</span>
+        <span class="venue">Gwangju <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/KT-Wiz-vs-Kia-Tigers-20260314.html">
+        <span class="teams">KT Wiz vs. Kia Tigers</span>
+        <span class="venue">Gwangju <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-Lotte-Giants-20260314.html">
+        <span class="teams">LG Twins vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-vs-Lotte-20260314.html">
+        <span class="teams">LG vs. Lotte</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-Lions-vs-Doosan-Bears-20260314.html">
+        <span class="teams">Samsung Lions vs. Doosan Bears</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-vs-Doosan-20260314.html">
+        <span class="teams">Samsung vs. Doosan</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/SSG-Landers-vs-Hanwha-Eagles-20260314.html">
+        <span class="teams">SSG Landers vs. Hanwha Eagles</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/SSG-vs-Hanwha-20260314.html">
+        <span class="teams">SSG vs. Hanwha</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
     </ul>
   </div>
 
-  <!-- March 15 -->
   <div class="day-block">
     <div class="day-header">📅 March 15, 2026</div>
     <ul class="game-list">
-      <li><a href="games/KT-Wiz-vs-Kia-Tigers-20260315.html"><span class="teams">KT Wiz vs. Kia Tigers</span><span class="venue">Gwangju <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/LG-Twins-vs-Lotte-Giants-20260315.html"><span class="teams">LG Twins vs. Lotte Giants</span><span class="venue">Busan-Sajik <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/SSG-Landers-vs-Hanwha-Eagles-20260315.html"><span class="teams">SSG Landers vs. Hanwha Eagles</span><span class="venue">Daejeon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Samsung-Lions-vs-Doosan-Bears-20260315.html"><span class="teams">Samsung Lions vs. Doosan Bears</span><span class="venue">Icheon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-NC-Dinos-20260315.html"><span class="teams">Kiwoom Heroes vs. NC Dinos</span><span class="venue">Changwon-Masan <span class="arrow">▶</span></span></a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-NC-Dinos-20260315.html">
+        <span class="teams">Kiwoom Heroes vs. NC Dinos</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-vs-NC-20260315.html">
+        <span class="teams">Kiwoom vs. NC</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/KT-vs-Kia-20260315.html">
+        <span class="teams">KT vs. Kia</span>
+        <span class="venue">Gwangju <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/KT-Wiz-vs-Kia-Tigers-20260315.html">
+        <span class="teams">KT Wiz vs. Kia Tigers</span>
+        <span class="venue">Gwangju <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-Lotte-Giants-20260315.html">
+        <span class="teams">LG Twins vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-vs-Lotte-20260315.html">
+        <span class="teams">LG vs. Lotte</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-Lions-vs-Doosan-Bears-20260315.html">
+        <span class="teams">Samsung Lions vs. Doosan Bears</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-vs-Doosan-20260315.html">
+        <span class="teams">Samsung vs. Doosan</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/SSG-Landers-vs-Hanwha-Eagles-20260315.html">
+        <span class="teams">SSG Landers vs. Hanwha Eagles</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/SSG-vs-Hanwha-20260315.html">
+        <span class="teams">SSG vs. Hanwha</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
     </ul>
   </div>
 
-  <!-- March 16 -->
   <div class="day-block">
     <div class="day-header">📅 March 16, 2026</div>
     <ul class="game-list">
-      <li><a href="games/LG-Twins-vs-KT-Wiz-20260316.html"><span class="teams">LG Twins vs. KT Wiz</span><span class="venue">Suwon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Doosan-Bears-vs-Hanwha-Eagles-20260316.html"><span class="teams">Doosan Bears vs. Hanwha Eagles</span><span class="venue">Daejeon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Samsung-Lions-vs-SSG-Landers-20260316.html"><span class="teams">Samsung Lions vs. SSG Landers</span><span class="venue">Incheon-Munhak <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-Lotte-Giants-20260316.html"><span class="teams">Kiwoom Heroes vs. Lotte Giants</span><span class="venue">Busan-Sajik <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Kia-Tigers-vs-NC-Dinos-20260316.html"><span class="teams">Kia Tigers vs. NC Dinos</span><span class="venue">Changwon <span class="arrow">▶</span></span></a></li>
+      <li><a href="games/Doosan-Bears-vs-Hanwha-Eagles-20260316.html">
+        <span class="teams">Doosan Bears vs. Hanwha Eagles</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Doosan-vs-Hanwha-20260316.html">
+        <span class="teams">Doosan vs. Hanwha</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kia-Tigers-vs-NC-Dinos-20260316.html">
+        <span class="teams">Kia Tigers vs. NC Dinos</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kia-vs-NC-20260316.html">
+        <span class="teams">Kia vs. NC</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-Lotte-Giants-20260316.html">
+        <span class="teams">Kiwoom Heroes vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-vs-Lotte-20260316.html">
+        <span class="teams">Kiwoom vs. Lotte</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-KT-Wiz-20260316.html">
+        <span class="teams">LG Twins vs. KT Wiz</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-vs-KT-20260316.html">
+        <span class="teams">LG vs. KT</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-Lions-vs-SSG-Landers-20260316.html">
+        <span class="teams">Samsung Lions vs. SSG Landers</span>
+        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-vs-SSG-20260316.html">
+        <span class="teams">Samsung vs. SSG</span>
+        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
+      </a></li>
     </ul>
   </div>
 
-  <!-- March 17 -->
   <div class="day-block">
     <div class="day-header">📅 March 17, 2026</div>
     <ul class="game-list">
-      <li><a href="games/Kia-Tigers-vs-NC-Dinos-20260317.html"><span class="teams">Kia Tigers vs. NC Dinos</span><span class="venue">Changwon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/LG-Twins-vs-KT-Wiz-20260317.html"><span class="teams">LG Twins vs. KT Wiz</span><span class="venue">Suwon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Doosan-Bears-vs-Hanwha-Eagles-20260317.html"><span class="teams">Doosan Bears vs. Hanwha Eagles</span><span class="venue">Daejeon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Samsung-Lions-vs-SSG-Landers-20260317.html"><span class="teams">Samsung Lions vs. SSG Landers</span><span class="venue">Incheon-Munhak <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-Lotte-Giants-20260317.html"><span class="teams">Kiwoom Heroes vs. Lotte Giants</span><span class="venue">Busan-Sajik <span class="arrow">▶</span></span></a></li>
+      <li><a href="games/Doosan-Bears-vs-Hanwha-Eagles-20260317.html">
+        <span class="teams">Doosan Bears vs. Hanwha Eagles</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Doosan-vs-Hanwha-20260317.html">
+        <span class="teams">Doosan vs. Hanwha</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kia-Tigers-vs-NC-Dinos-20260317.html">
+        <span class="teams">Kia Tigers vs. NC Dinos</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kia-vs-NC-20260317.html">
+        <span class="teams">Kia vs. NC</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-Lotte-Giants-20260317.html">
+        <span class="teams">Kiwoom Heroes vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-vs-Lotte-20260317.html">
+        <span class="teams">Kiwoom vs. Lotte</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-KT-Wiz-20260317.html">
+        <span class="teams">LG Twins vs. KT Wiz</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-vs-KT-20260317.html">
+        <span class="teams">LG vs. KT</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-Lions-vs-SSG-Landers-20260317.html">
+        <span class="teams">Samsung Lions vs. SSG Landers</span>
+        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-vs-SSG-20260317.html">
+        <span class="teams">Samsung vs. SSG</span>
+        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
+      </a></li>
     </ul>
   </div>
 
-  <!-- March 19 -->
   <div class="day-block">
     <div class="day-header">📅 March 19, 2026</div>
     <ul class="game-list">
-      <li><a href="games/LG-Twins-vs-SSG-Landers-20260319.html"><span class="teams">LG Twins vs. SSG Landers</span><span class="venue">Incheon-Munhak <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Doosan-Bears-vs-Lotte-Giants-20260319.html"><span class="teams">Doosan Bears vs. Lotte Giants</span><span class="venue">Busan-Sajik <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Samsung-Lions-vs-NC-Dinos-20260319.html"><span class="teams">Samsung Lions vs. NC Dinos</span><span class="venue">Changwon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/Kiwoom-Heroes-vs-KT-Wiz-20260319.html"><span class="teams">Kiwoom Heroes vs. KT Wiz</span><span class="venue">Suwon <span class="arrow">▶</span></span></a></li>
-      <li><a href="games/13217-Kia-vs-Hanwha-20260319.html"><span class="teams">Kia Tigers vs. Hanwha Eagles</span><span class="venue">Daejeon <span class="arrow">▶</span></span></a></li>
+      <li><a href="games/13217-Kia-vs-Hanwha-20260319.html">
+        <span class="teams">13217 Kia vs. Hanwha</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Doosan-Bears-vs-Lotte-Giants-20260319.html">
+        <span class="teams">Doosan Bears vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Doosan-vs-Lotte-20260319.html">
+        <span class="teams">Doosan vs. Lotte</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-KT-Wiz-20260319.html">
+        <span class="teams">Kiwoom Heroes vs. KT Wiz</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-vs-KT-20260319.html">
+        <span class="teams">Kiwoom vs. KT</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-SSG-Landers-20260319.html">
+        <span class="teams">LG Twins vs. SSG Landers</span>
+        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-vs-SSG-20260319.html">
+        <span class="teams">LG vs. SSG</span>
+        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-Lions-vs-NC-Dinos-20260319.html">
+        <span class="teams">Samsung Lions vs. NC Dinos</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-vs-NC-20260319.html">
+        <span class="teams">Samsung vs. NC</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+    </ul>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">📅 March 20, 2026</div>
+    <ul class="game-list">
+      <li><a href="games/Doosan-Bears-vs-Lotte-Giants-20260320.html">
+        <span class="teams">Doosan Bears vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kia-Tigers-vs-Hanwha-Eagles-20260320.html">
+        <span class="teams">Kia Tigers vs. Hanwha Eagles</span>
+        <span class="venue">Daejeon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-KT-Wiz-20260320.html">
+        <span class="teams">Kiwoom Heroes vs. KT Wiz</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-SSG-Landers-20260320.html">
+        <span class="teams">LG Twins vs. SSG Landers</span>
+        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Samsung-Lions-vs-NC-Dinos-20260320.html">
+        <span class="teams">Samsung Lions vs. NC Dinos</span>
+        <span class="venue">Changwon-Masan <span class="arrow">▶</span></span>
+      </a></li>
+    </ul>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">📅 March 21, 2026</div>
+    <ul class="game-list">
+      <li><a href="games/Hanwha-Eagles-vs-Lotte-Giants-20260321.html">
+        <span class="teams">Hanwha Eagles vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kia-Tigers-vs-Doosan-Bears-20260321.html">
+        <span class="teams">Kia Tigers vs. Doosan Bears</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kiwoom-Heroes-vs-SSG-Landers-20260321.html">
+        <span class="teams">Kiwoom Heroes vs. SSG Landers</span>
+        <span class="venue">Incheon-Munhak <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-Samsung-Lions-20260321.html">
+        <span class="teams">LG Twins vs. Samsung Lions</span>
+        <span class="venue">Daegu <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/NC-Dinos-vs-KT-Wiz-20260321.html">
+        <span class="teams">NC Dinos vs. KT Wiz</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
+    </ul>
+  </div>
+
+  <div class="day-block">
+    <div class="day-header">📅 March 22, 2026</div>
+    <ul class="game-list">
+      <li><a href="games/Hanwha-Eagles-vs-Lotte-Giants-20260322.html">
+        <span class="teams">Hanwha Eagles vs. Lotte Giants</span>
+        <span class="venue">Busan-Sajik <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/Kia-Tigers-vs-Doosan-Bears-20260322.html">
+        <span class="teams">Kia Tigers vs. Doosan Bears</span>
+        <span class="venue">Icheon <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/LG-Twins-vs-Samsung-Lions-20260322.html">
+        <span class="teams">LG Twins vs. Samsung Lions</span>
+        <span class="venue">Daegu <span class="arrow">▶</span></span>
+      </a></li>
+      <li><a href="games/NC-Dinos-vs-KT-Wiz-20260322.html">
+        <span class="teams">NC Dinos vs. KT Wiz</span>
+        <span class="venue">Suwon <span class="arrow">▶</span></span>
+      </a></li>
     </ul>
   </div>
 
